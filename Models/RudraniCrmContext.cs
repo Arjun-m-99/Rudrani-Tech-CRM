@@ -33,9 +33,7 @@ public partial class RudraniCrmContext : DbContext
 
             entity.HasIndex(e => e.Mobile, "UQ_CreateLead_Mobile").IsUnique();
 
-            entity.Property(e => e.LeadId)
-                .ValueGeneratedNever()
-                .HasColumnName("lead_id");
+            entity.Property(e => e.LeadId).HasColumnName("lead_id");
             entity.Property(e => e.AnnualRevenue).HasColumnName("annual_revenue");
             entity.Property(e => e.City)
                 .HasMaxLength(50)
@@ -83,7 +81,7 @@ public partial class RudraniCrmContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("last_name");
-            entity.Property(e => e.LeadImage).HasColumnName("lead_image");
+            //entity.Property(e => e.LeadImage).HasColumnName("lead_image");
             entity.Property(e => e.LeadOwner)
                 .HasMaxLength(50)
                 .IsUnicode(false)

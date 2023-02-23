@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace Rudrani_Tech_CRM.Models;
 
@@ -66,6 +65,5 @@ public partial class TblCreateLead
 
     public DateTime CreationDate { get; set; }
 
-    [JsonConverter(typeof(JsonToByteArrayConverter))]
-    public byte[]? LeadImage { get; set; }
+    //public byte[]? LeadImage { get; set; }
 }

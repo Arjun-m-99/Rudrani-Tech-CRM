@@ -90,21 +90,7 @@ namespace Rudrani_Tech_CRM.Controllers
               return Problem("Entity set 'RudraniCrmContext.TblCreateLeads'  is null.");
           }
             _context.TblCreateLeads.Add(tblCreateLead);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (TblCreateLeadExists(tblCreateLead.LeadId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTblCreateLead", new { id = tblCreateLead.LeadId }, tblCreateLead);
         }
