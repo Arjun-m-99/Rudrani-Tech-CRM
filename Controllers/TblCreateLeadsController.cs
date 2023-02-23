@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Rudrani_Tech_CRM.DTOs;
 using Rudrani_Tech_CRM.Models;
 
 namespace Rudrani_Tech_CRM.Controllers
@@ -83,16 +84,47 @@ namespace Rudrani_Tech_CRM.Controllers
         // POST: api/TblCreateLeads
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<TblCreateLead>> PostTblCreateLead(TblCreateLead tblCreateLead)
+        public async Task<ActionResult<CreateLeadDTO>> PostTblCreateLead(CreateLeadDTO tblCreateLead)
         {
           if (_context.TblCreateLeads == null)
           {
               return Problem("Entity set 'RudraniCrmContext.TblCreateLeads'  is null.");
           }
-            _context.TblCreateLeads.Add(tblCreateLead);
+            var createLead = new TblCreateLead
+            {
+                Company = tblCreateLead.Company,
+                LeadOwner = tblCreateLead.LeadOwner,
+                FirstNameTitle = tblCreateLead.FirstNameTitle,
+                FirstName = tblCreateLead.FirstName,
+                LastName = tblCreateLead.LastName,
+                Title = tblCreateLead.Title,
+                Email = tblCreateLead.Email,
+                Tel = tblCreateLead.Tel,
+                Fax = tblCreateLead.Fax,
+                Mobile = tblCreateLead.Mobile,
+                Website = tblCreateLead.Website,
+                LeadSource = tblCreateLead.LeadSource,
+                LeadStatus=tblCreateLead.LeadStatus,
+                Industry=tblCreateLead.Industry,
+                NoOfEmployees=tblCreateLead.NoOfEmployees,
+                AnnualRevenue= tblCreateLead.AnnualRevenue,
+                Rating=tblCreateLead.Rating,
+                EmailOptOut=tblCreateLead.EmailOptOut,
+                SkypeId=tblCreateLead.SkypeId,
+                SecondaryEmail=tblCreateLead.SecondaryEmail,
+                Twitter=tblCreateLead.Twitter,
+                Street=tblCreateLead.Street,
+                City=tblCreateLead.City,
+                State=tblCreateLead.State,
+                Zipcode=tblCreateLead.Zipcode,
+                Country=tblCreateLead.Country,
+                Description=tblCreateLead.Description,
+                Role=tblCreateLead.Role,
+            };
+            _context.TblCreateLeads.Add(createLead);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTblCreateLead", new { id = tblCreateLead.LeadId }, tblCreateLead);
+            return CreatedAtAction("GetTblCreateLead", new { id = createLead.LeadId }, createLead);
         }
 
         // DELETE: api/TblCreateLeads/5
