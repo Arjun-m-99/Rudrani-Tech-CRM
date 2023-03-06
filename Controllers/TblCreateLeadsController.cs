@@ -54,8 +54,8 @@ namespace Rudrani_Tech_CRM.Controllers
             MemoryStream ms = new MemoryStream(img);
             Image i = Image.FromStream(ms);           
             tblCreateLead.Profile = i;
-            
-            return Ok(tblCreateLead.Profile);
+            //i..Save(@"c:\s\pic.png", System.Drawing.Imaging.ImageFormat.Png);
+            return Ok(tblCreateLead);
         }
 
         // PUT: api/TblCreateLeads/5
