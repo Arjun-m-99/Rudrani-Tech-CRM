@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 
 namespace Rudrani_Tech_CRM.Models;
 
@@ -65,5 +67,8 @@ public partial class TblCreateLead
 
     public DateTime CreationDate { get; set; }
 
-    //public byte[]? LeadImage { get; set; }
+    public byte[]? LeadImage { get; set; }
+
+    [NotMapped] //Prevent fromundeclaration error from context
+    public Image Profile { get; set; }
 }

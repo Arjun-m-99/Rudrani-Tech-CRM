@@ -81,7 +81,7 @@ public partial class RudraniCrmContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("last_name");
-            //entity.Property(e => e.LeadImage).HasColumnName("lead_image");
+            entity.Property(e => e.LeadImage).HasColumnName("lead_image");
             entity.Property(e => e.LeadOwner)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -133,6 +133,7 @@ public partial class RudraniCrmContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("website");
             entity.Property(e => e.Zipcode).HasColumnName("zipcode");
+            //entity.Property(e => e.Profile).HasColumnName("lead_image");
         });
 
         OnModelCreatingPartial(modelBuilder);

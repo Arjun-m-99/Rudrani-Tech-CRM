@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Rudrani_Tech_CRM.Models;
 
@@ -14,6 +16,7 @@ namespace Rudrani_Tech_CRM.Controllers
     public class TblCreateLeadsController : ControllerBase
     {
         private readonly RudraniCrmContext _context;
+        private SqlConnection con;
 
         public TblCreateLeadsController(RudraniCrmContext context)
         {
@@ -45,8 +48,14 @@ namespace Rudrani_Tech_CRM.Controllers
             {
                 return NotFound();
             }
-
-            return tblCreateLead;
+            
+            //This code will helps to convert byte[] to image
+            byte[] img = tblCreateLead.LeadImage;
+            MemoryStream ms = new MemoryStream(img);
+            Image i = Image.FromStream(ms);           
+            tblCreateLead.Profile = i;
+            
+            return Ok(tblCreateLead.Profile);
         }
 
         // PUT: api/TblCreateLeads/5
