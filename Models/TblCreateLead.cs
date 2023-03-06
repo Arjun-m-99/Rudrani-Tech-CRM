@@ -65,5 +65,11 @@ public partial class TblCreateLead
 
     public DateTime CreationDate { get; set; }
 
-    //public byte[]? LeadImage { get; set; }
+    public byte[]? LeadImage { get; set; }
+
+    [NotMapped] //Prevent fromundeclaration error from context
+    public Image Profile { get; set; }
+    
+    [NotMapped] //Prevent fromundeclaration error from context
+    public string ImgURL { get; set; }
 }

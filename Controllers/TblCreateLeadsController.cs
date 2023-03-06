@@ -46,8 +46,19 @@ namespace Rudrani_Tech_CRM.Controllers
             {
                 return NotFound();
             }
+            
+            //This code will helps to convert byte[] to image
+            byte[] img = tblCreateLead.LeadImage;
+            MemoryStream ms = new MemoryStream(img);
+            Image i = Image.FromStream(ms);           
+            tblCreateLead.Profile = i;
+            //i..Save(@"c:\s\pic.png", System.Drawing.Imaging.ImageFormat.Png);
 
-            return tblCreateLead;
+            //Convert byte arry to base64string
+            string imreBase64Data = Convert.ToBase64String(img);
+            string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+            tblCreateLead.ImgURL = imgDataURL;
+            return Ok(tblCreateLead);
         }
 
         // PUT: api/TblCreateLeads/5
