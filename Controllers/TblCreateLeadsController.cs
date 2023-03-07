@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Rudrani_Tech_CRM.DTOs;
 using Rudrani_Tech_CRM.Models;
@@ -16,6 +17,7 @@ namespace Rudrani_Tech_CRM.Controllers
     public class TblCreateLeadsController : ControllerBase
     {
         private readonly RudraniCrmContext _context;
+        private SqlConnection con;
 
         public TblCreateLeadsController(RudraniCrmContext context)
         {
@@ -59,6 +61,7 @@ namespace Rudrani_Tech_CRM.Controllers
             string imreBase64Data = Convert.ToBase64String(img);
             string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
             tblCreateLead.ImgURL = imgDataURL;
+
             return Ok(tblCreateLead);
         }
 

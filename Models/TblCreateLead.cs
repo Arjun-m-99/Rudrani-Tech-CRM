@@ -71,7 +71,8 @@ public partial class TblCreateLead
 
     [NotMapped] //Prevent fromundeclaration error from context
     public Image Profile { get; set; }
-    
+   
     [NotMapped] //Prevent fromundeclaration error from context
     public string ImgURL { get; set; }
+
 }
