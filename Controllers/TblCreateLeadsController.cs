@@ -157,8 +157,8 @@ namespace Rudrani_Tech_CRM.Controllers
             _context.TblCreateLeads.Add(createLead);
             await _context.SaveChangesAsync();
 
-            //return CreatedAtAction("GetTblCreateLead", new { id = createLead.LeadId }, createLead);
-            return Ok(GetTblCreateLead(createLead.LeadId));
+            return CreatedAtAction("GetTblCreateLead", new { id = createLead.LeadId }, createLead);
+            //return Ok(GetTblCreateLead(createLead.LeadId));
         }
 
         // DELETE: api/TblCreateLeads/5
