@@ -14,7 +14,12 @@ builder.Services.AddDbContext<RudraniCrmContext>(options =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(o=>o.SwaggerDoc("v1",new Microsoft.OpenApi.Models.OpenApiInfo
+{
+    Title ="Create lead",
+    Version= "v1",
+    Description="desc1"
+}));
 
 var app = builder.Build();
 
@@ -22,7 +27,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(o=>o.SwaggerEndpoint("/swagger/v1/swagger.json","create lead Api"));
 }
 
 app.UseHttpsRedirection();

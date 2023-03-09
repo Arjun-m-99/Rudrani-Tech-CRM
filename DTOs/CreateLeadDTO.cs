@@ -61,5 +61,6 @@
         //public DateTime CreationDate { get; set; }
 
         //public byte[]? LeadImage { get; set; }
+        public IFormFile LeadImageJPG { get; set; }
     }
 }

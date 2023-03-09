@@ -54,13 +54,17 @@ namespace Rudrani_Tech_CRM.Controllers
             byte[] img = tblCreateLead.LeadImage;
             MemoryStream ms = new MemoryStream(img);
             Image i = Image.FromStream(ms);           
-            tblCreateLead.Profile = i;
-            //i..Save(@"c:\s\pic.png", System.Drawing.Imaging.ImageFormat.Png);
+            //tblCreateLead.Profile = i;
+
+            //i.Save(@"c:\s\pic.png", System.Drawing.Imaging.ImageFormat.Png);
 
             //Convert byte arry to base64string
             string imreBase64Data = Convert.ToBase64String(img);
             string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
             tblCreateLead.ImgURL = imgDataURL;
+
+            //For hiding byte[]
+            tblCreateLead.LeadImage = null;
 
             return Ok(tblCreateLead);
         }
@@ -99,7 +103,7 @@ namespace Rudrani_Tech_CRM.Controllers
         // POST: api/TblCreateLeads
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CreateLeadDTO>> PostTblCreateLead(CreateLeadDTO tblCreateLead)
+        public async Task<ActionResult<CreateLeadDTO>> PostTblCreateLead([FromForm]CreateLeadDTO tblCreateLead)
         {
           if (_context.TblCreateLeads == null)
           {
@@ -136,10 +140,25 @@ namespace Rudrani_Tech_CRM.Controllers
                 Description=tblCreateLead.Description,
                 Role=tblCreateLead.Role,
             };
+            if (tblCreateLead.LeadImageJPG != null)
+            {
+                ////Getting FileName
+                //var fileName = Path.GetFileName(tblCreateLead.LeadImageJPG.FileName);
+                ////Getting file Extension
+                //var fileExtension = Path.GetExtension(fileName);
+                //// concatenating  FileName + FileExtension
+                //var newFileName = String.Concat(Convert.ToString(Guid.NewGuid()), fileExtension);
+                using (var target = new MemoryStream())
+                {
+                    tblCreateLead.LeadImageJPG.CopyTo(target);
+                    createLead.LeadImage = target.ToArray();
+                }
+            }
             _context.TblCreateLeads.Add(createLead);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTblCreateLead", new { id = createLead.LeadId }, createLead);
+            //return CreatedAtAction("GetTblCreateLead", new { id = createLead.LeadId }, createLead);
+            return Ok(GetTblCreateLead(createLead.LeadId));
         }
 
         // DELETE: api/TblCreateLeads/5
