@@ -63,4 +63,9 @@
         //public byte[]? LeadImage { get; set; }
         public IFormFile LeadImageJPG { get; set; }
     }
+
+    public class UpdateLeadDTO : CreateLeadDTO
+    {
+        public int LeadID { get; set; }
+    }
 }

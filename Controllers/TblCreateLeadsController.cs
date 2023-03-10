@@ -37,7 +37,7 @@ namespace Rudrani_Tech_CRM.Controllers
 
         // GET: api/TblCreateLeads/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<TblCreateLead>> GetTblCreateLead(int id)
+        public async Task<ActionResult<TblCreateLead>> GetTblCreateLead([FromRoute]int id)
         {
           if (_context.TblCreateLeads == null)
           {
@@ -64,22 +64,32 @@ namespace Rudrani_Tech_CRM.Controllers
             tblCreateLead.ImgURL = imgDataURL;
 
             //For hiding byte[]
-            tblCreateLead.LeadImage = null;
 
+            //if (tblCreateLead.LeadImage != null)
+            //{
+            //    return Ok(File(tblCreateLead.LeadImage, "image/jpg"));
+            //}
+
+            //test to display image
+            //var imge = tblCreateLead.LeadImage;
+            //byte[] pic = Convert.FromBase64String(imreBase64Data);
+
+            //return Ok(File(pic,"auto"));
             return Ok(tblCreateLead);
+
         }
 
         // PUT: api/TblCreateLeads/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTblCreateLead(int id, TblCreateLead tblCreateLead)
+        public async Task<IActionResult> PutTblCreateLead(int id, [FromForm]UpdateLeadDTO updateLeadDTO)
         {
-            if (id != tblCreateLead.LeadId)
+            if (id != updateLeadDTO.LeadID)
             {
-                return BadRequest();
+                return BadRequest("Id not matched");
             }
 
-            _context.Entry(tblCreateLead).State = EntityState.Modified;
+            _context.Entry(updateLeadDTO).State = EntityState.Modified;
 
             try
             {
@@ -89,7 +99,7 @@ namespace Rudrani_Tech_CRM.Controllers
             {
                 if (!TblCreateLeadExists(id))
                 {
-                    return NotFound();
+                    return NotFound("no user found");
                 }
                 else
                 {
@@ -157,8 +167,10 @@ namespace Rudrani_Tech_CRM.Controllers
             _context.TblCreateLeads.Add(createLead);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTblCreateLead", new { id = createLead.LeadId }, createLead);
-            //return Ok(GetTblCreateLead(createLead.LeadId));
+            var id = createLead.LeadId;
+
+            //return CreatedAtAction("GetTblCreateLead", new { id = createLead.LeadId }, createLead);
+            return Ok("Lead created with ID: "+createLead.LeadId);
         }
 
         // DELETE: api/TblCreateLeads/5
