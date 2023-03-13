@@ -101,10 +101,10 @@ namespace Rudrani_Tech_CRM.Controllers
             updateLead.FirstName = updateLeadDTO.FirstName != null ? updateLeadDTO.FirstName : updateLead.FirstName;
             updateLead.LastName = updateLeadDTO.LastName != null ? updateLeadDTO.LastName : updateLead.LastName;
             updateLead.Title = updateLeadDTO.Title != null ? updateLeadDTO.Title : updateLead.Title;
-            updateLead.Email = updateLeadDTO.Email != null ? updateLeadDTO.Email : updateLead.Email;
+            //updateLead.Email = updateLeadDTO.Email != null ? updateLeadDTO.Email : updateLead.Email;
             updateLead.Tel = updateLeadDTO.Tel != null ? updateLeadDTO.Tel : updateLead.Tel;
             updateLead.Fax = updateLeadDTO.Fax != null ? updateLeadDTO.Fax : updateLead.Fax;
-            updateLead.Mobile = updateLeadDTO.Mobile != null ? updateLeadDTO.Mobile : updateLead.Mobile;
+            //updateLead.Mobile = updateLeadDTO.Mobile != 0 ? updateLeadDTO.Mobile : updateLead.Mobile;
             updateLead.Website = updateLeadDTO.Website != null ? updateLeadDTO.Website : updateLead.Website;
             updateLead.LeadSource = updateLeadDTO.LeadSource != null ? updateLeadDTO.LeadSource : updateLead.LeadSource;
             updateLead.LeadStatus = updateLeadDTO.LeadStatus != null ? updateLeadDTO.LeadStatus : updateLead.LeadStatus;
@@ -122,7 +122,7 @@ namespace Rudrani_Tech_CRM.Controllers
             updateLead.Zipcode = updateLeadDTO.Zipcode != null ? updateLeadDTO.Zipcode : updateLead.Zipcode;
             updateLead.Country = updateLeadDTO.Country != null ? updateLeadDTO.Country : updateLead.Country;
             updateLead.Description = updateLeadDTO.Description != null ? updateLeadDTO.Description : updateLead.Description;
-            updateLead.Role = updateLeadDTO.Role != null ? updateLeadDTO.Role : updateLead.Role;
+            //updateLead.Role = updateLeadDTO.Role != null ? updateLeadDTO.Role : updateLead.Role;
 
             if (updateLeadDTO.LeadImageJPG != null)
             {
